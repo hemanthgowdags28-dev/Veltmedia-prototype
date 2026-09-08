@@ -1,127 +1,188 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =====================================================================
+   VELT MEDIA — script.js
+   Nav behaviour, scroll-driven reveals (GSAP + ScrollTrigger), stat
+   counters, and card tilt/glow micro-interactions.
+   ===================================================================== */
+(function(){
+  'use strict';
 
-    // --- 1. Sticky Navbar Effect ---
-    const navbar = document.getElementById("navbar");
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
-    });
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var html   = document.documentElement;
+  var header = document.getElementById('header');
+  var navToggle = document.getElementById('navToggle');
+  var nav = document.getElementById('nav');
+  var navLinks = document.querySelectorAll('.nav__link');
+  var sections = document.querySelectorAll('main section[id]');
 
-    // --- 2. Mobile Menu Toggle ---
-    const hamburger = document.querySelector(".hamburger");
-    const navLinks = document.querySelector(".nav-links");
-
-    hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-        // Animate hamburger lines into an 'X'
-        hamburger.classList.toggle("toggle");
-    });
-
-    // Close menu when a link is clicked
-    document.querySelectorAll(".nav-links a").forEach(link => {
-        link.addEventListener("click", () => {
-            navLinks.classList.remove("active");
-        });
-    });
-
-    // --- 3. Intersection Observer for Scroll Animations ---
-    const animElements = document.querySelectorAll(".scroll-anim");
-    
-    const animObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Add the visible class to trigger CSS transition
-                entry.target.classList.add("is-visible");
-                
-                // If the element has a counter, trigger it
-                const counters = entry.target.querySelectorAll(".counter");
-                if (counters.length > 0) {
-                    runCounters(counters);
-                }
-                
-                // Unobserve after animating so it doesn't repeat unnecessarily
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        root: null,
-        threshold: 0.15, // Trigger when 15% of the element is visible
-        rootMargin: "0px 0px -50px 0px"
-    });
-
-    // Staggered delays for grids (Services, Gallery)
-    let delay = 0;
-    animElements.forEach((el, index) => {
-        // If element has 'stagger-up', add inline transition delay based on previous siblings
-        if (el.classList.contains('stagger-up') || el.classList.contains('zoom-in')) {
-            el.style.transitionDelay = `${delay}s`;
-            delay += 0.15;
-            // Reset delay if we suspect a new row/section (naive approach)
-            if (delay > 0.6) delay = 0; 
-        }
-        animObserver.observe(el);
-    });
-
-    // --- 4. Number Counter Animation ---
-    // This function animates numbers from 0 to target value
-    function runCounters(counters) {
-        counters.forEach(counter => {
-            counter.innerText = '0';
-            
-            const updateCounter = () => {
-                const target = +counter.getAttribute('data-target');
-                const c = +counter.innerText;
-                
-                // Calculate increment logic based on target size
-                const increment = target / 40; 
-                
-                if (c < target) {
-                    counter.innerText = `${Math.ceil(c + increment)}`;
-                    setTimeout(updateCounter, 30); // 30ms frame rate
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            
-            updateCounter();
-        });
+  /* ---------------------------------------------------------------
+     Header state on scroll (rAF-throttled)
+  --------------------------------------------------------------- */
+  var scrollTicking = false;
+  function updateHeader(){
+    if(window.scrollY > 40){ header.classList.add('scrolled'); }
+    else{ header.classList.remove('scrolled'); }
+    scrollTicking = false;
+  }
+  document.addEventListener('scroll', function(){
+    if(!scrollTicking){
+      requestAnimationFrame(updateHeader);
+      scrollTicking = true;
     }
+  }, { passive:true });
+  updateHeader();
 
-    // --- 5. Custom Hover 3D Tilt Effect on Service Cards (Bonus Dynamics) ---
-    const cards = document.querySelectorAll(".service-card, .gallery-item");
-    
-    cards.forEach(card => {
-        card.addEventListener("mousemove", (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            // Calculate rotation values
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = ((y - centerY) / centerY) * -5; // max 5 deg
-            const rotateY = ((x - centerX) / centerX) * 5;  // max 5 deg
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+  /* ---------------------------------------------------------------
+     Mobile navigation
+  --------------------------------------------------------------- */
+  function closeNav(){
+    nav.classList.remove('nav--open');
+    navToggle.classList.remove('active');
+    navToggle.setAttribute('aria-expanded','false');
+    document.body.classList.remove('no-scroll');
+  }
+  function toggleNav(){
+    var isOpen = nav.classList.toggle('nav--open');
+    navToggle.classList.toggle('active', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.classList.toggle('no-scroll', isOpen);
+  }
+  if(navToggle){ navToggle.addEventListener('click', toggleNav); }
+  navLinks.forEach(function(link){ link.addEventListener('click', closeNav); });
+
+  /* ---------------------------------------------------------------
+     Active nav link tracking
+  --------------------------------------------------------------- */
+  if('IntersectionObserver' in window && sections.length){
+    var navMap = new Map();
+    navLinks.forEach(function(link){
+      navMap.set(link.getAttribute('href').slice(1), link);
+    });
+    var sectionObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var link = navMap.get(entry.target.id);
+        if(!link || !entry.isIntersecting) return;
+        navLinks.forEach(function(l){ l.classList.remove('active'); });
+        link.classList.add('active');
+      });
+    }, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
+    sections.forEach(function(s){ sectionObserver.observe(s); });
+  }
+
+  /* ---------------------------------------------------------------
+     Stat counters (48H / 100%)
+  --------------------------------------------------------------- */
+  var statEls = document.querySelectorAll('[data-count]');
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    var duration = 1500;
+    var start = null;
+    function step(ts){
+      if(start === null) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if(progress < 1){ requestAnimationFrame(step); }
+    }
+    requestAnimationFrame(step);
+  }
+  if(statEls.length){
+    if(prefersReducedMotion){
+      statEls.forEach(function(el){
+        el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
+      });
+    } else if('IntersectionObserver' in window){
+      var statObserver = new IntersectionObserver(function(entries, obs){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            animateCount(entry.target);
+            obs.unobserve(entry.target);
+          }
         });
-        
-        card.addEventListener("mouseleave", () => {
-            // Reset transforms on mouse leave
-            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-            // Small timeout to allow css transition to take over
-            setTimeout(() => {
-                card.style.transition = "all 0.4s ease";
-            }, 10);
-        });
-        
-        card.addEventListener("mouseenter", () => {
-            // Remove transition while moving to feel immediate
-            card.style.transition = "none";
-        });
+      }, { threshold:0.6 });
+      statEls.forEach(function(el){ statObserver.observe(el); });
+    }
+  }
+
+  /* ---------------------------------------------------------------
+     Card tilt + cursor-tracked glow (Services & Branches)
+  --------------------------------------------------------------- */
+  if(!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches){
+    var tiltCards = document.querySelectorAll('.service-card, .branch-card');
+    tiltCards.forEach(function(card){
+      var maxTilt = card.classList.contains('service-card') ? 5 : 3;
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var x = e.clientX - r.left;
+        var y = e.clientY - r.top;
+        card.style.setProperty('--mx', (x / r.width * 100) + '%');
+        card.style.setProperty('--my', (y / r.height * 100) + '%');
+        var rx = ((y / r.height) - 0.5) * -maxTilt;
+        var ry = ((x / r.width) - 0.5) * maxTilt;
+        card.style.transform = 'translateY(-6px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
+      });
+      card.addEventListener('mouseenter', function(){ card.style.willChange = 'transform'; });
+      card.addEventListener('mouseleave', function(){
+        card.style.transform = '';
+        card.style.willChange = 'auto';
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     Ambient cursor glow (desktop, fine-pointer only)
+  --------------------------------------------------------------- */
+  var cursorGlow = document.querySelector('.cursor-glow');
+  if(cursorGlow){
+    if(!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches){
+      var cx = 0, cy = 0, tx = 0, ty = 0, glowActive = false;
+      window.addEventListener('mousemove', function(e){
+        tx = e.clientX; ty = e.clientY;
+        if(!glowActive){ cursorGlow.style.opacity = '1'; glowActive = true; }
+      });
+      (function raf(){
+        cx += (tx - cx) * 0.14;
+        cy += (ty - cy) * 0.14;
+        cursorGlow.style.transform = 'translate(' + (cx - 210) + 'px,' + (cy - 210) + 'px)';
+        requestAnimationFrame(raf);
+      })();
+    } else {
+      cursorGlow.style.display = 'none';
+    }
+  }
+
+  /* ---------------------------------------------------------------
+     Scroll-driven reveals — GSAP + ScrollTrigger
+     Elements only ever hide via CSS once `.gsap-ready` is present
+     on <html>, and that class is only added here, after GSAP has
+     confirmed it's loaded. If the CDN fails, content stays visible.
+  --------------------------------------------------------------- */
+  function initScrollAnimations(){
+    html.classList.add('gsap-ready');
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.querySelectorAll('[data-reveal]').forEach(function(el){
+      gsap.to(el, {
+        opacity:1, y:0, duration:0.9, ease:'power3.out',
+        scrollTrigger:{ trigger:el, start:'top 88%' }
+      });
     });
 
-});
+    document.querySelectorAll('[data-reveal-group]').forEach(function(group){
+      gsap.to(group.children, {
+        opacity:1, y:0, duration:0.8, ease:'power3.out', stagger:0.12,
+        scrollTrigger:{ trigger:group, start:'top 88%' }
+      });
+    });
+  }
+
+  var gsapAvailable = (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined');
+  if(gsapAvailable && !prefersReducedMotion){
+    initScrollAnimations();
+  }
+  /* If GSAP didn't load, or the person prefers reduced motion, we
+     simply never add `.gsap-ready` — the base CSS already renders
+     every [data-reveal] element at full opacity, so nothing breaks. */
+
+})();
+        
