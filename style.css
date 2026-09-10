@@ -135,20 +135,28 @@ h1,h2,h3,h4,h5{ font-family:var(--font); color:var(--white); line-height:1.05; }
 .header{
   position:fixed; inset:0 0 auto 0; z-index:1000;
   padding:24px 0;
+  transition:padding var(--t-fast);
+}
+/* The glass blur lives on a pseudo-element rather than .header itself.
+   backdrop-filter on .header would make it a "containing block" for any
+   position:fixed descendant — trapping the mobile nav panel inside the
+   header's own slim box instead of letting it fix to the full viewport. */
+.header::before{
+  content:''; position:absolute; inset:0; z-index:-1;
   background:rgba(11,11,11,.32);
   backdrop-filter:blur(16px) saturate(150%);
   -webkit-backdrop-filter:blur(16px) saturate(150%);
   border-bottom:1px solid transparent;
-  transition:padding var(--t-fast), background var(--t-fast), border-color var(--t-fast);
+  transition:background var(--t-fast), border-color var(--t-fast);
 }
-.header.scrolled{
-  padding:14px 0;
+.header.scrolled{ padding:14px 0; }
+.header.scrolled::before{
   background:rgba(8,8,8,.82);
   border-bottom-color:var(--border);
 }
-.header__inner{ display:flex; align-items:center; justify-content:space-between; }
+.header__inner{ display:flex; align-items:center; justify-content:space-between; flex-wrap:nowrap; }
 
-.logo{ display:inline-flex; flex-direction:column; line-height:.85; }
+.logo{ display:inline-flex; flex-direction:column; line-height:.85; flex-shrink:0; }
 .logo__main{ font-weight:900; font-size:1.5rem; color:var(--red); letter-spacing:-.02em; }
 .logo__sub{ font-size:.5rem; font-weight:600; letter-spacing:.5em; color:var(--white); margin-top:5px; }
 
@@ -167,11 +175,14 @@ h1,h2,h3,h4,h5{ font-family:var(--font); color:var(--white); line-height:1.05; }
 .nav__link:hover::after, .nav__link.active::after{ transform:scaleX(1); transform-origin:left; }
 
 .nav-toggle{
-  display:none; flex-direction:column; justify-content:center; gap:5px;
-  width:32px; height:32px; background:none; border:none; padding:0; z-index:1001;
+  display:none; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+  width:46px; height:46px; flex-shrink:0;
+  background:var(--card); border:1px solid var(--border); border-radius:50%;
+  padding:0; z-index:1001; transition:border-color var(--t-fast), background var(--t-fast);
 }
+.nav-toggle:hover{ border-color:var(--border-hover); }
 .nav-toggle span{
-  display:block; width:100%; height:2px; background:var(--white);
+  display:block; width:18px; height:2px; background:var(--white);
   transition:transform var(--t-fast), opacity var(--t-fast);
 }
 .nav-toggle.active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
@@ -491,6 +502,7 @@ h1,h2,h3,h4,h5{ font-family:var(--font); color:var(--white); line-height:1.05; }
   display:flex; flex-wrap:wrap; gap:40px 64px; margin-bottom:48px;
   padding-bottom:40px; border-bottom:1px solid var(--border);
 }
+.contact__point{ padding-left:20px; border-left:2px solid var(--red); }
 .contact__point h3{
   font-size:1.05rem; font-weight:700; color:var(--red);
   text-transform:uppercase; letter-spacing:.02em; margin-bottom:6px;
@@ -512,19 +524,90 @@ h1,h2,h3,h4,h5{ font-family:var(--font); color:var(--white); line-height:1.05; }
   50%{ box-shadow:0 0 0 20px rgba(229,9,20,0); }
 }
 
-.contact__info{ margin-top:60px; }
+.contact__info{ margin-top:64px; }
 .contact__label{
   font-size:.75rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--red); margin-bottom:20px;
+  color:var(--red); margin-bottom:22px;
 }
-.contact__rows{ display:flex; flex-direction:column; gap:4px; max-width:440px; }
+.contact__rows{ display:flex; flex-direction:column; gap:14px; max-width:460px; }
 .contact__row{
-  display:flex; align-items:center; gap:16px; padding:14px 4px;
-  border-bottom:1px solid var(--border); transition:padding-left var(--t-fast), border-color var(--t-fast);
+  display:flex; align-items:center; gap:18px; padding:16px 20px;
+  background:var(--card); border:1px solid var(--border); border-radius:16px;
+  transition:transform var(--t-fast), border-color var(--t-fast), background var(--t-fast);
 }
-.contact__row:hover{ padding-left:10px; border-color:var(--border-hover); }
+.contact__row:hover{ transform:translateX(8px); border-color:var(--border-hover); background:var(--card-alt); }
 .contact__icon{
-  flex:0 0 auto; width:22px; height:22px; color:var(--red);
+  flex:0 0 auto; width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(229,9,20,.12); color:var(--red);
+  transition:background var(--t-fast), color var(--t-fast);
 }
+.contact__icon svg{ width:20px; height:20px; }
+.contact__row:hover .contact__icon{ background:var(--red); color:var(--white); }
 .contact__label-text{ font-weight:600; color:var(--white); min-width:88px; }
-.contact__value{ color:var(--grey); word-break:break
+.contact__value{ color:var(--grey); word-break:break-word; }
+.contact__row:hover .contact__value{ color:var(--white); }
+
+.nav-backdrop{
+  position:fixed; inset:0; z-index:998;
+  background:rgba(0,0,0,.6);
+  opacity:0; pointer-events:none;
+  transition:opacity var(--t-med);
+}
+.nav-backdrop.active{ opacity:1; pointer-events:auto; }
+
+/* =====================================================================
+   MOBILE NAV OVERLAY
+   ===================================================================== */
+@media (max-width:900px){
+  .nav-toggle{ display:flex; }
+  .nav{
+    position:fixed; inset:0 0 0 auto; width:min(82vw,360px);
+    background:rgba(9,9,9,.97); backdrop-filter:blur(20px);
+    transform:translateX(100%); transition:transform .5s var(--ease);
+    display:flex; align-items:center; z-index:999;
+    border-left:1px solid var(--border);
+  }
+  .nav--open{ transform:translateX(0); }
+  .nav__list{ flex-direction:column; gap:30px; padding:0 clamp(30px,8vw,60px); }
+  .nav__link{ font-size:1.3rem; }
+}
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+.footer{
+  padding:70px 0 32px;
+  background:linear-gradient(to bottom, transparent, rgba(0,0,0,.35));
+  border-top:1px solid var(--border);
+}
+.footer__top{
+  display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start;
+  gap:36px 48px; padding-bottom:36px; border-bottom:1px solid var(--border);
+}
+.footer__tagline{ font-size:.82rem; color:var(--grey-dim); margin-top:14px; letter-spacing:.02em; }
+.footer__nav{ display:flex; flex-wrap:wrap; gap:12px 26px; padding-top:6px; }
+.footer__nav a{ font-size:.85rem; color:var(--grey-dim); transition:color var(--t-fast); }
+.footer__nav a:hover{ color:var(--white); }
+.footer__social{ display:flex; gap:12px; }
+.footer__social a{
+  width:42px; height:42px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--card); border:1px solid var(--border); color:var(--red);
+  transition:background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+}
+.footer__social svg{ width:18px; height:18px; }
+.footer__social a:hover{ background:var(--red); color:var(--white); border-color:var(--red); transform:translateY(-3px); }
+.footer__bottom{ padding-top:26px; text-align:center; }
+.footer__copy{ font-size:.78rem; color:var(--grey-mute); }
+
+/* =====================================================================
+   REDUCED MOTION
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .hero__glow, .scroll-cue span, .cta-btn{ animation:none !important; }
+  .gsap-ready [data-reveal],
+  .gsap-ready [data-reveal-group] > *{ opacity:1; transform:none; }
+  *{ transition-duration:.01ms !important; }
+}
