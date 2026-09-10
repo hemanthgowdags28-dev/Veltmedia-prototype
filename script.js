@@ -11,6 +11,7 @@
   var header = document.getElementById('header');
   var navToggle = document.getElementById('navToggle');
   var nav = document.getElementById('nav');
+  var navBackdrop = document.getElementById('navBackdrop');
   var navLinks = document.querySelectorAll('.nav__link');
   var sections = document.querySelectorAll('main section[id]');
 
@@ -39,14 +40,17 @@
     navToggle.classList.remove('active');
     navToggle.setAttribute('aria-expanded','false');
     document.body.classList.remove('no-scroll');
+    if(navBackdrop){ navBackdrop.classList.remove('active'); }
   }
   function toggleNav(){
     var isOpen = nav.classList.toggle('nav--open');
     navToggle.classList.toggle('active', isOpen);
     navToggle.setAttribute('aria-expanded', String(isOpen));
     document.body.classList.toggle('no-scroll', isOpen);
+    if(navBackdrop){ navBackdrop.classList.toggle('active', isOpen); }
   }
   if(navToggle){ navToggle.addEventListener('click', toggleNav); }
+  if(navBackdrop){ navBackdrop.addEventListener('click', closeNav); }
   navLinks.forEach(function(link){ link.addEventListener('click', closeNav); });
 
   /* ---------------------------------------------------------------
@@ -185,4 +189,3 @@
      every [data-reveal] element at full opacity, so nothing breaks. */
 
 })();
-        
