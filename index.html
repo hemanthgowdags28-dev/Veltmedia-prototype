@@ -1,876 +1,612 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0b0b">
-<title>VELT MEDIA — Post-Production Agency</title>
-<meta name="description" content="VELT MEDIA is a post-production video editing agency turning raw footage into scroll-stopping content. 48H turnaround, 100% on-time rate.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#070709">
+  <title>VELT MEDIA — Post-Production Agency</title>
+  <meta name="description" content="VELT MEDIA is a post-production video editing agency turning raw footage into scroll-stopping content. 48H turnaround, 100% on-time rate.">
+  <meta property="og:title" content="VELT MEDIA — Post-Production Agency">
+  <meta property="og:description" content="We turn raw footage into scroll-stopping content. Automotive, commercial, and event post-production with 48H turnaround.">
 
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
+  <!-- Import Map for Three.js -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<a href="#main" class="skip-link">Skip to main content</a>
-<div class="cursor-glow" aria-hidden="true"></div>
-<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
-
-<!-- ============================= HEADER ============================= -->
-<header class="header" id="header">
-  <div class="container header__inner">
-    <a href="#hero" class="logo" aria-label="VELT MEDIA — back to top">
-      <span class="logo__main">VELT</span>
-      <span class="logo__sub">M E D I A</span>
-    </a>
-
-    <nav class="nav" id="nav" aria-label="Primary">
-      <ul class="nav__list">
-        <li><a href="#services" class="nav__link">Services</a></li>
-        <li><a href="#branches" class="nav__link">Branches</a></li>
-        <li><a href="#work" class="nav__link">Work</a></li>
-        <li><a href="#team" class="nav__link">Team</a></li>
-        <li><a href="#contact" class="nav__link">Contact</a></li>
-      </ul>
-    </nav>
-
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-controls="nav" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<main id="main">
-
-  <!-- ============================= HERO ============================= -->
-  <section class="hero" id="hero">
-    <div class="hero__glow hero__glow--a" aria-hidden="true"></div>
-    <div class="hero__glow hero__glow--b" aria-hidden="true"></div>
-    <span class="watermark watermark--hero" aria-hidden="true">V</span>
-
-    <div class="container hero__inner">
-
-      <div class="hero__brand" data-reveal>
-        <div class="brand-lockup brand-lockup--lg">
-          <span class="brand-lockup__main">VELT</span>
-          <span class="brand-lockup__sub">M E D I A</span>
-        </div>
-        <p class="eyebrow-tag">Post &nbsp;-&nbsp; Production Agency</p>
-        <div class="divider-line"></div>
-      </div>
-
-      <h1 class="hero__headline" data-reveal-group>
-        <span class="line"><span class="c-white">A</span></span>
-        <span class="line"><span class="c-grey">Video</span></span>
-        <span class="line"><span class="c-white">Edit</span><span class="c-red">ing</span></span>
-        <span class="line"><span class="c-grey">Agency</span></span>
-      </h1>
-
-      <p class="hero__sub" data-reveal>
-        We turn raw footage into <em>scroll-stopping content.</em><br>
-        Reels &bull; Shots &bull; Post-Production
-      </p>
-
-      <div class="hero__stats" data-reveal-group>
-        <div class="stat">
-          <span class="stat__num" data-count="48" data-suffix="H">0H</span>
-          <span class="stat__label">Turnaround</span>
-        </div>
-        <div class="stat__sep" aria-hidden="true"></div>
-        <div class="stat">
-          <span class="stat__num" data-count="100" data-suffix="%">0%</span>
-          <span class="stat__label">On-Time Rate</span>
-        </div>
-      </div>
-
-    </div>
-
-    <a href="#services" class="scroll-cue" aria-label="Scroll to services">
-      <span></span>
-    </a>
-  </section>
-
-  <!-- ============================= SERVICES ============================= -->
-  <section class="services" id="services">
-    <span class="watermark watermark--right" aria-hidden="true">V</span>
-    <div class="container">
-
-      <div class="section-head" data-reveal-group>
-        <p class="eyebrow">// Services</p>
-        <h2 class="section-title">
-          <span class="c-white">What We</span><br>
-          <span class="c-grey">Build For You</span>
-        </h2>
-      </div>
-
-      <div class="services__grid" data-reveal-group>
-        <article class="service-card">
-          <span class="service-card__mod">Mod &bull; 01</span>
-          <h3 class="service-card__title">Automotive Content</h3>
-          <p class="service-card__desc">High-impact edits for vehicle showrooms, product launches, brand campaigns, and viral cinematic edits.</p>
-        </article>
-
-        <article class="service-card">
-          <span class="service-card__mod">Mod &bull; 02</span>
-          <h3 class="service-card__title">Commercial &amp; On-Face Talking Content</h3>
-          <p class="service-card__desc">Scroll-stopping short-form content built for Instagram, YT Shorts, and paid media.</p>
-        </article>
-
-        <article class="service-card">
-          <span class="service-card__mod">Mod &bull; 03</span>
-          <h3 class="service-card__title">Events &amp; Wedding Content</h3>
-          <p class="service-card__desc">Candid-style edits, highlight reels, and social-first clips that capture the raw emotion of your special day.</p>
-        </article>
-      </div>
-
-      <blockquote class="services__quote" data-reveal>
-        “We build our services around what you actually need, not just a fixed list.”
-      </blockquote>
-
-    </div>
-  </section>
-
-  <!-- ============================= BRANCHES ============================= -->
-  <section class="branches" id="branches">
-    <div class="container">
-
-      <div class="section-head" data-reveal-group>
-        <p class="eyebrow">// Sub-Brands</p>
-        <h2 class="section-title">
-          <span class="c-white">Our</span> <span class="c-red">Branches</span>
-        </h2>
-      </div>
-
-      <div class="branches__list" data-reveal-group>
-
-        <a href="https://www.instagram.com/motoframe.mov?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" class="branch-card" target="_blank" rel="noopener noreferrer">
-          <span class="branch-card__pin" aria-hidden="true"></span>
-          <span class="branch-card__mark">MOTO<br>FRAME<em>.MOV</em></span>
-          <span class="branch-card__body">
-            <span class="branch-card__handle">@MOTOFRAME.MOV</span>
-            <span class="branch-card__desc">Automotive reels, filming, and color grading for showrooms and brand campaigns.</span>
-          </span>
-        </a>
-
-        <a href="https://www.instagram.com/timelineframe.mov?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" class="branch-card" target="_blank" rel="noopener noreferrer">
-          <span class="branch-card__pin" aria-hidden="true"></span>
-          <span class="branch-card__mark">TIMELINE<em>.MOV</em></span>
-          <span class="branch-card__body">
-            <span class="branch-card__handle">@TIMELINEFRAME.MOV</span>
-            <span class="branch-card__desc">Business visuals and food commercials — planned, shot, and edited end-to-end.</span>
-          </span>
-        </a>
-
-        <a href="https://www.instagram.com/everframe.mov/?utm_source=ig_web_button_share_sheet" class="branch-card" target="_blank" rel="noopener noreferrer">
-          <span class="branch-card__pin" aria-hidden="true"></span>
-          <span class="branch-card__mark branch-card__mark--light">EVER<br>FRAME<em>.MOV</em></span>
-          <span class="branch-card__body">
-            <span class="branch-card__handle">@EVERFRAME.MOV</span>
-            <span class="branch-card__desc">Wedding and event films — highlight reels that capture the raw emotion of the day.</span>
-          </span>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-     WORK / PROJECT GALLERY
-     ============================================================ -->
-
-<section class="work section" id="work">
-
-  <div class="container">
-
-    <!-- SECTION HEADING -->
-    <div class="section-head" data-reveal>
-
-      <p class="eyebrow">
-        Selected Work
-      </p>
-
-      <h2 class="section-title">
-        <span class="c-white">Project</span>
-        <span class="c-grey">Gallery</span>
-      </h2>
-
-      <p class="section-description">
-        A selection of edits, campaigns and visual stories crafted by VELT MEDIA.
-      </p>
-
-    </div>
-
-
-    <!-- ========================================================
-         GALLERY GRID
-         ======================================================== -->
-
-    <div class="gallery__grid" data-reveal-group>
-
-
-      <!-- ======================================================
-           PROJECT 01 — FEATURED
-           ====================================================== -->
-
-      <article class="gallery-item gallery-item--featured">
-
-        <a
-          href="https://www.instagram.com/reel/DZwFabWzaL2/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ=="
-          target="_blank"
-          rel="noopener noreferrer"
-          class="gallery-item__link"
-        >
-
-          <div class="gallery-item__media">
-
-            <img
-              src="thumbnails/showroom-reel.jpeg"
-              alt="Showroom Launch Reel"
-              loading="lazy"
-              decoding="async"
-            >
-
-          </div>
-
-
-          <div class="gallery-item__overlay"></div>
-
-
-          <div
-            class="gallery-item__play"
-            aria-hidden="true"
-          >
-            ▶
-          </div>
-
-
-          <div class="gallery-item__meta">
-
-            <span class="gallery-item__tag">
-              Automotive
-            </span>
-
-            <h3>
-              Showroom Launch Reel
-            </h3>
-
-            <span class="gallery-item__number">
-              01
-            </span>
-
-          </div>
-
-        </a>
-
-      </article>
-
-
-
-      <!-- ======================================================
-           PROJECT 02
-           ====================================================== -->
-
-      <article class="gallery-item gallery-item--wide">
-
-        <a
-          href="https://www.instagram.com/reel/DR2DdgjE9Kv/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ=="
-          target="_blank"
-          rel="noopener noreferrer"
-          class="gallery-item__link"
-        >
-
-          <div class="gallery-item__media">
-
-            <img
-              src="thumbnails/speedramp-reel.jpeg"
-              alt="Cinematic Drive Edit"
-              loading="lazy"
-              decoding="async"
-            >
-
-          </div>
-
-
-          <div class="gallery-item__overlay"></div>
-
-
-          <div
-            class="gallery-item__play"
-            aria-hidden="true"
-          >
-            ▶
-          </div>
-
-
-          <div class="gallery-item__meta">
-
-            <span class="gallery-item__tag">
-              Automotive
-            </span>
-
-            <h3>
-              Speed Ramp Edit
-            </h3>
-
-            <span class="gallery-item__number">
-              02
-            </span>
-
-          </div>
-
-        </a>
-
-      </article>
-
-
-
-      <!-- ======================================================
-           PROJECT 03
-           ====================================================== -->
-
-      <article class="gallery-item">
-
-        <a
-          href="https://www.instagram.com/reel/DY1-bHyirlm/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ=="
-          target="_blank"
-          rel="noopener noreferrer"
-          class="gallery-item__link"
-        >
-
-          <div class="gallery-item__media">
-
-            <img
-              src="thumbnails/brand-reel.jpeg"
-              alt="Brand Campaign Edit"
-              loading="lazy"
-              decoding="async"
-            >
-
-          </div>
-
-
-          <div class="gallery-item__overlay"></div>
-
-
-          <div
-            class="gallery-item__play"
-            aria-hidden="true"
-          >
-            ▶
-          </div>
-
-
-          <div class="gallery-item__meta">
-
-            <span class="gallery-item__tag">
-              Brand Campaign
-            </span>
-
-            <h3>
-              Brand Campaign Edit
-            </h3>
-
-            <span class="gallery-item__number">
-              03
-            </span>
-
-          </div>
-
-        </a>
-
-      </article>
-
-
-
-      <!-- ======================================================
-           PROJECT 04
-           ====================================================== -->
-
-      <article class="gallery-item">
-
-        <a
-          href="https://www.instagram.com/reel/DXTb76WEVQe/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA=="
-          target="_blank"
-          rel="noopener noreferrer"
-          class="gallery-item__link"
-        >
-
-          <div class="gallery-item__media">
-
-            <img
-              src="thumbnails/social-media-reel.jpeg"
-              alt="Social Media Reel"
-              loading="lazy"
-              decoding="async"
-            >
-
-          </div>
-
-
-          <div class="gallery-item__overlay"></div>
-
-
-          <div
-            class="gallery-item__play"
-            aria-hidden="true"
-          >
-            ▶
-          </div>
-
-
-          <div class="gallery-item__meta">
-
-            <span class="gallery-item__tag">
-              Social Media
-            </span>
-
-            <h3>
-              Social Media Reel
-            </h3>
-
-            <span class="gallery-item__number">
-              04
-            </span>
-
-          </div>
-
-        </a>
-
-      </article>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ============================= TESTIMONIALS ============================= -->
-<section class="testimonials" id="testimonials">
-
-  <div class="testimonials__head">
-    <div class="container">
-
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">// Client Notes</p>
-
-        <h2 class="section-title">
-          <span class="c-white">Words</span>
-          <span class="c-grey">From The Other Side</span>
-        </h2>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="testimonial-marquee" aria-label="Client testimonials">
-
-    <div class="testimonial-track">
-
-      <!-- ORIGINAL SET -->
-
-      <article class="testimonial-card">
-        <div class="testimonial-card__top">
-          <span class="testimonial-card__stars">★★★★★</span>
-          <span class="testimonial-card__index">01</span>
-        </div>
-
-        <p class="testimonial-card__quote">
-          "[INSERT_TESTIMONIAL_HERE]"
-        </p>
-
-        <div class="testimonial-card__client">
-          <strong>[CLIENT NAME]</strong>
-          <span>[COMPANY / BRAND]</span>
-        </div>
-      </article>
-
-
-      <article class="testimonial-card testimonial-card--dark">
-        <div class="testimonial-card__top">
-          <span class="testimonial-card__stars">★★★★★</span>
-          <span class="testimonial-card__index">02</span>
-        </div>
-
-        <p class="testimonial-card__quote">
-          "[INSERT_TESTIMONIAL_HERE]"
-        </p>
-
-        <div class="testimonial-card__client">
-          <strong>[CLIENT NAME]</strong>
-          <span>[COMPANY / BRAND]</span>
-        </div>
-      </article>
-
-
-      <article class="testimonial-card">
-        <div class="testimonial-card__top">
-          <span class="testimonial-card__stars">★★★★★</span>
-          <span class="testimonial-card__index">03</span>
-        </div>
-
-        <p class="testimonial-card__quote">
-          "[INSERT_TESTIMONIAL_HERE]"
-        </p>
-
-        <div class="testimonial-card__client">
-          <strong>[CLIENT NAME]</strong>
-          <span>[COMPANY / BRAND]</span>
-        </div>
-      </article>
-
-
-      <!-- DUPLICATED SET FOR SEAMLESS LOOP -->
-
-      <article class="testimonial-card" aria-hidden="true">
-        <div class="testimonial-card__top">
-          <span class="testimonial-card__stars">★★★★★</span>
-          <span class="testimonial-card__index">01</span>
-        </div>
-
-        <p class="testimonial-card__quote">
-          "[INSERT_TESTIMONIAL_HERE]"
-        </p>
-
-        <div class="testimonial-card__client">
-          <strong>[CLIENT NAME]</strong>
-          <span>[COMPANY / BRAND]</span>
-        </div>
-      </article>
-
-
-      <article class="testimonial-card testimonial-card--dark" aria-hidden="true">
-        <div class="testimonial-card__top">
-          <span class="testimonial-card__stars">★★★★★</span>
-          <span class="testimonial-card__index">02</span>
-        </div>
-
-        <p class="testimonial-card__quote">
-          "[INSERT_TESTIMONIAL_HERE]"
-        </p>
-
-        <div class="testimonial-card__client">
-          <strong>[CLIENT NAME]</strong>
-          <span>[COMPANY / BRAND]</span>
-        </div>
-      </article>
-
-
-      <article class="testimonial-card" aria-hidden="true">
-        <div class="testimonial-card__top">
-          <span class="testimonial-card__stars">★★★★★</span>
-          <span class="testimonial-card__index">03</span>
-        </div>
-
-        <p class="testimonial-card__quote">
-          "[INSERT_TESTIMONIAL_HERE]"
-        </p>
-
-        <div class="testimonial-card__client">
-          <strong>[CLIENT NAME]</strong>
-          <span>[COMPANY / BRAND]</span>
-        </div>
-      </article>
-
-    </div>
-
-  </div>
-
-</section>
-
- <!-- ============================= TEAM ============================= -->
-<section class="team" id="team">
-
-  <div class="container">
-
-    <div class="section-head" data-reveal-group>
-      <p class="eyebrow">// The Team</p>
-
-      <h2 class="section-title">
-        <span class="c-white">Behind</span>
-        <span class="c-red">The Frame</span>
-      </h2>
-    </div>
-
-
-    <p class="team__quote" data-reveal>
-      Consistency, quality, and commitment — guided by the vision of our founders,
-      we refine every frame to deliver cinematic excellence, from first concept
-      to final cut.
-    </p>
-
-
-    <!-- ================= FOUNDERS ================= -->
-
-    <div class="team-leadership" data-reveal-group>
-
-      <!-- LEO -->
-
-      <article class="leader-card">
-
-        <div class="leader-card__media">
-          <span class="leader-card__placeholder">
-            <img src="imgs/leo2.png" alt="Leo — Founder"
-            loading="lazy"
-            decoding="async">
-          </span>
-
-          <span class="leader-card__number">01</span>
-
-          <span class="leader-card__badge">
-            Founder
-          </span>
-        </div>
-
-        <div class="leader-card__info">
-
-          <div>
-            <p class="leader-card__eyebrow">
-              The Founder
-            </p>
-
-            <h3 class="leader-card__name">
-              Leo
-            </h3>
-          </div>
-
-          <p class="leader-card__role">
-            The Managing Director
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- TAHIR -->
-
-      <article class="leader-card">
-
-        <div class="leader-card__media">
-          <span class="leader-card__placeholder">
-            <img src="imgs/tahir.png" alt="tahir---co-founder"
-            loading="lazy"
-            decoding="async">
-          </span>
-
-          <span class="leader-card__number">02</span>
-
-          <span class="leader-card__badge">
-            Co-Founder
-          </span>
-        </div>
-
-        <div class="leader-card__info">
-
-          <div>
-            <p class="leader-card__eyebrow">
-              Co-Founder
-            </p>
-
-            <h3 class="leader-card__name">
-              Tahir
-            </h3>
-          </div>
-
-          <p class="leader-card__role">
-            The Creative Head
-          </p>
-
-        </div>
-
-      </article>
-
-    </div>
-
-
-    <!-- ================= CORE TEAM ================= -->
-
-    <div class="team-support" data-reveal-group>
-
-      <!-- LOUIS -->
-
-      <article class="support-card">
-
-        <div class="support-card__media">
-          <span class="support-card__placeholder">
-             <img src="imgs/louis.png" alt="louis----Audio Engineer"
-            loading="lazy"
-            decoding="async">
-          </span>
-        </div>
-
-        <div class="support-card__content">
-
-          <div>
-            <span class="support-card__number">
-              03
-            </span>
-
-            <h3>
-              Louis
-            </h3>
-          </div>
-
-          <p>
-            Audio Engineer
-            <span>— 7 Years Experience</span>
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- KEVIN -->
-
-      <article class="support-card">
-
-        <div class="support-card__media">
-          <span class="support-card__placeholder">
-            <img src="imgs/kevin2.png" alt="kevin---capital Partner"
-            loading="lazy"
-            decoding="async">
-          </span>
-        </div>
-
-        <div class="support-card__content">
-
-          <div>
-            <span class="support-card__number">
-              04
-            </span>
-
-            <h3>
-              Kevin
-            </h3>
-          </div>
-
-          <p>
-            Capital Partner
-          </p>
-
-        </div>
-
-      </article>
-
-    </div>
-
-  </div>
-
-</section>
-
-  <!-- ============================= CONTACT ============================= -->
-  <section class="contact" id="contact">
-    <span class="watermark watermark--hero" aria-hidden="true">V</span>
-    <div class="hero__glow hero__glow--a" aria-hidden="true"></div>
-
-    <div class="container">
-
-      <p class="eyebrow" data-reveal>// Initiate</p>
-
-      <h2 class="contact__headline" data-reveal-group>
-        <span class="line c-white">Ready To</span>
-        <span class="line c-grey">Build Your</span>
-        <span class="line c-red">Next Video?</span>
-      </h2>
-
-      <div class="contact__split" data-reveal-group>
-        <div class="contact__point">
-          <h3>48-Hr Delivery</h3>
-          <p>Fast &bull; Zero Compromise</p>
-        </div>
-        <div class="contact__point">
-          <h3>Cinematic Grade</h3>
-          <p>Every Frame Colour-Matched</p>
-        </div>
-      </div>
-
-      <a href="https://wa.link/dwd485" class="cta-btn" target="_blank" rel="noopener noreferrer" data-reveal>
-        DM TO <span class="c-red">BOOK YOUR</span> SLOT!
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- FIXED 3D FLUID GLASS BACKGROUND CANVAS -->
+  <div id="webgl-mount" class="webgl-mount" aria-hidden="true"></div>
+  <div class="ambient-vignette" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+  <!-- ============================= HEADER ============================= -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#hero" class="logo" aria-label="VELT MEDIA — back to top">
+        <span class="logo__main">VELT</span>
+        <span class="logo__sub">MEDIA</span>
       </a>
 
-      <div class="contact__info">
-        <h5 class="contact__label">Contact Details:</h5>
+      <nav class="nav" id="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a href="#services" class="nav__link">Services</a></li>
+          <li><a href="#branches" class="nav__link">Branches</a></li>
+          <li><a href="#work" class="nav__link">Work</a></li>
+          <li><a href="#team" class="nav__link">Team</a></li>
+          <li><a href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
 
-        <div class="contact__rows" data-reveal-group>
-          <a href="https://wa.link/g9cn31" class="contact__row" target="_blank" rel="noopener noreferrer">
-            <span class="contact__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.35 0-2.62-.32-3.73-.9L3 21l1.9-5.77A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+      <div class="header__actions">
+        <a href="https://wa.link/dwd485" target="_blank" rel="noopener noreferrer" class="header__cta magnetic-btn">
+          <span>Book a Slot</span>
+        </a>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-controls="nav" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================= MINIMAL HERO ============================= -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+
+        <div class="hero__eyebrow" data-reveal>
+          <span class="hero__tag">Post-Production Agency</span>
+        </div>
+
+        <h1 class="hero__headline" data-reveal-group>
+          <span class="line">A Video</span>
+          <span class="line"><span class="c-serif">Editing</span> <span class="c-red">Agency.</span></span>
+        </h1>
+
+        <p class="hero__sub" data-reveal>
+          We turn raw footage into <em>scroll-stopping content.</em><br>
+          Reels &middot; Commercials &middot; Post-Production
+        </p>
+
+        <div class="hero__actions" data-reveal>
+          <a href="https://wa.link/dwd485" target="_blank" rel="noopener noreferrer" class="btn-primary magnetic-btn">
+            <span>Book Your Slot</span>
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 13.5L13.5 4.5M13.5 4.5H6.5M13.5 4.5V11.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#work" class="btn-glass magnetic-btn">
+            <span>View Work</span>
+          </a>
+        </div>
+
+        <div class="hero__stats" data-reveal>
+          <div class="stat">
+            <span class="stat__num" data-count="48" data-suffix="H">48H</span>
+            <span class="stat__label">Turnaround</span>
+          </div>
+          <div class="stat__sep" aria-hidden="true"></div>
+          <div class="stat">
+            <span class="stat__num" data-count="100" data-suffix="%">100%</span>
+            <span class="stat__label">On-Time Rate</span>
+          </div>
+        </div>
+
+      </div>
+
+      <a href="#services" class="scroll-cue" aria-label="Scroll to services">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ============================= SERVICES ============================= -->
+    <section class="services" id="services">
+      <div class="container">
+
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">01 &middot; Services</p>
+          <h2 class="section-title">
+            What We <span class="c-serif">Build For You</span>
+          </h2>
+        </div>
+
+        <div class="services__grid" data-reveal-group>
+          <article class="service-card fluid-glass-card" data-tilt-card>
+            <span class="service-card__num">01</span>
+            <h3 class="service-card__title">Automotive Content</h3>
+            <p class="service-card__desc">High-impact edits for vehicle showrooms, product launches, brand campaigns, and cinematic speed ramps.</p>
+          </article>
+
+          <article class="service-card fluid-glass-card" data-tilt-card>
+            <span class="service-card__num">02</span>
+            <h3 class="service-card__title">Commercial &amp; Talking Content</h3>
+            <p class="service-card__desc">Scroll-stopping short-form content built for Instagram Reels, YouTube Shorts, and paid media.</p>
+          </article>
+
+          <article class="service-card fluid-glass-card" data-tilt-card>
+            <span class="service-card__num">03</span>
+            <h3 class="service-card__title">Events &amp; Wedding Content</h3>
+            <p class="service-card__desc">Candid-style edits, highlight reels, and social-first clips that capture the raw emotion of your day.</p>
+          </article>
+        </div>
+
+        <!-- Minimal Interactive Colour Grade Preview -->
+        <div class="grade-preview fluid-glass-panel" data-reveal>
+          <div class="grade-preview__header">
+            <div>
+              <p class="eyebrow">Colour Pipeline</p>
+              <h3 class="grade-preview__title">Raw Log to <span class="c-serif">Final Cut</span></h3>
+            </div>
+            <p class="grade-preview__hint">Drag slider to compare</p>
+          </div>
+
+          <div class="grade-comparator" id="gradeComparator" aria-label="Before and after color grading comparison">
+            <div class="grade-comparator__layer grade-comparator__layer--graded">
+              <img src="thumbnails/showroom-reel.jpeg" alt="Final colour-graded frame" draggable="false">
+              <span class="grade-label grade-label--right">Final Grade</span>
+            </div>
+            <div class="grade-comparator__layer grade-comparator__layer--raw" id="gradeRawLayer">
+              <img src="thumbnails/showroom-reel.jpeg" alt="Raw camera log frame" draggable="false">
+              <span class="grade-label grade-label--left">Raw Log</span>
+            </div>
+            <div class="grade-comparator__handle" id="gradeHandle" aria-hidden="true">
+              <div class="grade-comparator__line"></div>
+              <div class="grade-comparator__knob">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M7 6L3 10L7 14M13 6L17 10L13 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <input type="range" min="5" max="95" value="50" class="grade-comparator__range" id="gradeRange" aria-label="Compare raw log and final colour grade">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================= BRANCHES ============================= -->
+    <section class="branches" id="branches">
+      <div class="container">
+
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">02 &middot; Sub-Brands</p>
+          <h2 class="section-title">
+            Our <span class="c-serif c-red">Branches</span>
+          </h2>
+        </div>
+
+        <div class="branches__list" data-reveal-group>
+
+          <a href="https://www.instagram.com/motoframe.mov?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" class="branch-card fluid-glass-card" data-tilt-card target="_blank" rel="noopener noreferrer">
+            <span class="branch-card__mark">MOTO<br>FRAME<em>.MOV</em></span>
+            <span class="branch-card__body">
+              <span class="branch-card__handle">@motoframe.mov</span>
+              <span class="branch-card__desc">Automotive reels, filming, and colour grading for showrooms and brand campaigns.</span>
             </span>
-            <span class="contact__label-text">WhatsApp:</span>
-            <span class="contact__value">+91 8088425328</span>
+            <span class="branch-card__arrow" aria-hidden="true">↗</span>
           </a>
 
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=veltmedia7@gmail.com&su=Project%20Inquiry%20%2F%20Booking%20a%20Slot&body=Hi%20Velt%20Media%2C%0A%0AI%E2%80%99m%20reaching%20out%20to%20book%20a%20post-production%20slot%20for%20an%20upcoming%20project.%0A%0APlease%20let%20me%20know%20your%20current%20availability%20and%20the%20best%20time%20for%20a%20quick%20chat%20or%20discovery%20call%20to%20go%20over%20the%20scope%20and%20timeline.%0A%0ALooking%20forward%20to%20connecting!" target="_blank" rel="noopener noreferrer" aria-label="Open in Gmail" class="contact__row" target="_blank" rel="noopener noreferrer">
-            <span class="contact__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <a href="https://www.instagram.com/timelineframe.mov?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" class="branch-card fluid-glass-card" data-tilt-card target="_blank" rel="noopener noreferrer">
+            <span class="branch-card__mark">TIMELINE<em>.MOV</em></span>
+            <span class="branch-card__body">
+              <span class="branch-card__handle">@timelineframe.mov</span>
+              <span class="branch-card__desc">Business visuals and food commercials — planned, shot, and edited end-to-end.</span>
             </span>
-            <span class="contact__label-text">Email:</span>
-            <span class="contact__value">veltmedia7@gmail.com</span>
+            <span class="branch-card__arrow" aria-hidden="true">↗</span>
           </a>
 
-          <a href="https://www.instagram.com/veltmedia__/" class="contact__row" target="_blank" rel="noopener noreferrer">
-            <span class="contact__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.5"/></svg>
+          <a href="https://www.instagram.com/everframe.mov/?utm_source=ig_web_button_share_sheet" class="branch-card fluid-glass-card" data-tilt-card target="_blank" rel="noopener noreferrer">
+            <span class="branch-card__mark branch-card__mark--light">EVER<br>FRAME<em>.MOV</em></span>
+            <span class="branch-card__body">
+              <span class="branch-card__handle">@everframe.mov</span>
+              <span class="branch-card__desc">Wedding and event films — highlight reels that capture the raw emotion of the day.</span>
             </span>
-            <span class="contact__label-text">Instagram:</span>
-            <span class="contact__value">@veltmedia__</span>
+            <span class="branch-card__arrow" aria-hidden="true">↗</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= WORK / PROJECT GALLERY ============================= -->
+    <section class="work" id="work">
+      <div class="container">
+
+        <div class="section-head section-head--row" data-reveal>
+          <div>
+            <p class="eyebrow">03 &middot; Selected Work</p>
+            <h2 class="section-title">
+              Project <span class="c-serif">Gallery</span>
+            </h2>
+          </div>
+
+          <div class="gallery-filters" role="tablist" aria-label="Filter projects">
+            <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+            <button type="button" class="filter-btn" data-filter="automotive" role="tab" aria-selected="false">Automotive</button>
+            <button type="button" class="filter-btn" data-filter="brand" role="tab" aria-selected="false">Commercial</button>
+            <button type="button" class="filter-btn" data-filter="social" role="tab" aria-selected="false">Social</button>
+          </div>
+        </div>
+
+        <div class="gallery__grid" id="galleryGrid" data-reveal-group>
+
+          <!-- PROJECT 01 -->
+          <article class="gallery-item gallery-item--featured fluid-glass-card" data-category="automotive" data-tilt-card>
+            <a href="https://www.instagram.com/reel/DZwFabWzaL2/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="gallery-item__link">
+              <div class="gallery-item__media">
+                <img src="thumbnails/showroom-reel.jpeg" alt="Showroom Launch Reel" loading="lazy" decoding="async">
+              </div>
+              <div class="gallery-item__overlay"></div>
+              <div class="gallery-item__play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+              </div>
+              <div class="gallery-item__meta">
+                <span class="gallery-item__tag">Automotive</span>
+                <h3>Showroom Launch Reel</h3>
+                <span class="gallery-item__number">01</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- PROJECT 02 -->
+          <article class="gallery-item gallery-item--wide fluid-glass-card" data-category="automotive" data-tilt-card>
+            <a href="https://www.instagram.com/reel/DR2DdgjE9Kv/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="gallery-item__link">
+              <div class="gallery-item__media">
+                <img src="thumbnails/speedramp-reel.jpeg" alt="Speed Ramp Edit" loading="lazy" decoding="async">
+              </div>
+              <div class="gallery-item__overlay"></div>
+              <div class="gallery-item__play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+              </div>
+              <div class="gallery-item__meta">
+                <span class="gallery-item__tag">Automotive</span>
+                <h3>Speed Ramp Edit</h3>
+                <span class="gallery-item__number">02</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- PROJECT 03 -->
+          <article class="gallery-item fluid-glass-card" data-category="brand" data-tilt-card>
+            <a href="https://www.instagram.com/reel/DY1-bHyirlm/?utm_source=ig_web_copy_link&stkn=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="gallery-item__link">
+              <div class="gallery-item__media">
+                <img src="thumbnails/brand-reel.jpeg" alt="Brand Campaign Edit" loading="lazy" decoding="async">
+              </div>
+              <div class="gallery-item__overlay"></div>
+              <div class="gallery-item__play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+              </div>
+              <div class="gallery-item__meta">
+                <span class="gallery-item__tag">Commercial</span>
+                <h3>Brand Campaign Edit</h3>
+                <span class="gallery-item__number">03</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- PROJECT 04 -->
+          <article class="gallery-item fluid-glass-card" data-category="social" data-tilt-card>
+            <a href="https://www.instagram.com/reel/DXTb76WEVQe/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" class="gallery-item__link">
+              <div class="gallery-item__media">
+                <img src="thumbnails/social-media-reel.jpeg" alt="Social Media Reel" loading="lazy" decoding="async">
+              </div>
+              <div class="gallery-item__overlay"></div>
+              <div class="gallery-item__play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+              </div>
+              <div class="gallery-item__meta">
+                <span class="gallery-item__tag">Social Media</span>
+                <h3>Social Media Reel</h3>
+                <span class="gallery-item__number">04</span>
+              </div>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= TESTIMONIALS ============================= -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">04 &middot; Client Notes</p>
+          <h2 class="section-title">
+            Words From <span class="c-serif">Clients</span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="testimonial-marquee" aria-label="Client testimonials">
+        <div class="testimonial-track">
+
+          <article class="testimonial-card fluid-glass-card">
+            <div class="testimonial-card__top">
+              <span class="testimonial-card__stars">★★★★★</span>
+              <span class="testimonial-card__index">01</span>
+            </div>
+            <p class="testimonial-card__quote">
+              “VELT turned our raw showroom walkarounds into a cinematic launch reel in under 36 hours. The speed ramps doubled our watch time.”
+            </p>
+            <div class="testimonial-card__client">
+              <strong>Arjun Mehta</strong>
+              <span>Apex Motors</span>
+            </div>
+          </article>
+
+          <article class="testimonial-card testimonial-card--dark fluid-glass-card">
+            <div class="testimonial-card__top">
+              <span class="testimonial-card__stars">★★★★★</span>
+              <span class="testimonial-card__index">02</span>
+            </div>
+            <p class="testimonial-card__quote">
+              “Every cut lands on the beat, the typography is clean, and they have never missed a single 48-hour delivery window.”
+            </p>
+            <div class="testimonial-card__client">
+              <strong>Rohan Kapoor</strong>
+              <span>Atelier Hospitality</span>
+            </div>
+          </article>
+
+          <article class="testimonial-card fluid-glass-card">
+            <div class="testimonial-card__top">
+              <span class="testimonial-card__stars">★★★★★</span>
+              <span class="testimonial-card__index">03</span>
+            </div>
+            <p class="testimonial-card__quote">
+              “Everframe captured the exact emotion of our celebration. The colour grade and sound design felt like a feature film.”
+            </p>
+            <div class="testimonial-card__client">
+              <strong>Neha &amp; Vikram</strong>
+              <span>Wedding Commission</span>
+            </div>
+          </article>
+
+          <!-- DUPLICATED FOR SEAMLESS LOOP -->
+          <article class="testimonial-card fluid-glass-card" aria-hidden="true">
+            <div class="testimonial-card__top">
+              <span class="testimonial-card__stars">★★★★★</span>
+              <span class="testimonial-card__index">01</span>
+            </div>
+            <p class="testimonial-card__quote">
+              “VELT turned our raw showroom walkarounds into a cinematic launch reel in under 36 hours. The speed ramps doubled our watch time.”
+            </p>
+            <div class="testimonial-card__client">
+              <strong>Arjun Mehta</strong>
+              <span>Apex Motors</span>
+            </div>
+          </article>
+
+          <article class="testimonial-card testimonial-card--dark fluid-glass-card" aria-hidden="true">
+            <div class="testimonial-card__top">
+              <span class="testimonial-card__stars">★★★★★</span>
+              <span class="testimonial-card__index">02</span>
+            </div>
+            <p class="testimonial-card__quote">
+              “Every cut lands on the beat, the typography is clean, and they have never missed a single 48-hour delivery window.”
+            </p>
+            <div class="testimonial-card__client">
+              <strong>Rohan Kapoor</strong>
+              <span>Atelier Hospitality</span>
+            </div>
+          </article>
+
+          <article class="testimonial-card fluid-glass-card" aria-hidden="true">
+            <div class="testimonial-card__top">
+              <span class="testimonial-card__stars">★★★★★</span>
+              <span class="testimonial-card__index">03</span>
+            </div>
+            <p class="testimonial-card__quote">
+              “Everframe captured the exact emotion of our celebration. The colour grade and sound design felt like a feature film.”
+            </p>
+            <div class="testimonial-card__client">
+              <strong>Neha &amp; Vikram</strong>
+              <span>Wedding Commission</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= TEAM ============================= -->
+    <section class="team" id="team">
+      <div class="container">
+
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">05 &middot; The Team</p>
+          <h2 class="section-title">
+            Behind <span class="c-serif c-red">The Frame</span>
+          </h2>
+          <p class="team__quote">
+            Guided by the vision of our founders, we refine every frame from first concept to final cut.
+          </p>
+        </div>
+
+        <!-- FOUNDERS -->
+        <div class="team-leadership" data-reveal-group>
+
+          <article class="leader-card fluid-glass-card" data-tilt-card>
+            <div class="leader-card__media">
+              <img src="imgs/leo2.png" alt="Leo — Founder" loading="lazy" decoding="async" class="leader-card__img">
+              <span class="leader-card__number">01</span>
+            </div>
+            <div class="leader-card__info">
+              <div>
+                <p class="leader-card__eyebrow">Founder</p>
+                <h3 class="leader-card__name">Leo</h3>
+              </div>
+              <p class="leader-card__role">Managing Director</p>
+            </div>
+          </article>
+
+          <article class="leader-card fluid-glass-card" data-tilt-card>
+            <div class="leader-card__media">
+              <img src="imgs/tahir.png" alt="Tahir — Co-Founder" loading="lazy" decoding="async" class="leader-card__img">
+              <span class="leader-card__number">02</span>
+            </div>
+            <div class="leader-card__info">
+              <div>
+                <p class="leader-card__eyebrow">Co-Founder</p>
+                <h3 class="leader-card__name">Tahir</h3>
+              </div>
+              <p class="leader-card__role">Creative Head</p>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- CORE TEAM -->
+        <div class="team-support" data-reveal-group>
+
+          <article class="support-card fluid-glass-card" data-tilt-card>
+            <div class="support-card__media">
+              <img src="imgs/louis.png" alt="Louis — Audio Engineer" loading="lazy" decoding="async" class="support-card__img">
+            </div>
+            <div class="support-card__content">
+              <div>
+                <span class="support-card__number">03</span>
+                <h3>Louis</h3>
+              </div>
+              <p class="support-card__role">Audio Engineer <span>&middot; 7 Yrs Exp</span></p>
+            </div>
+          </article>
+
+          <article class="support-card fluid-glass-card" data-tilt-card>
+            <div class="support-card__media">
+              <img src="imgs/kevin2.png" alt="Kevin — Capital Partner" loading="lazy" decoding="async" class="support-card__img">
+            </div>
+            <div class="support-card__content">
+              <div>
+                <span class="support-card__number">04</span>
+                <h3>Kevin</h3>
+              </div>
+              <p class="support-card__role">Capital Partner</p>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================= CONTACT ============================= -->
+    <section class="contact" id="contact">
+      <div class="container">
+
+        <div class="contact__shell fluid-glass-panel" data-reveal>
+          <div class="contact__grid">
+
+            <div class="contact__left">
+              <p class="eyebrow">06 &middot; Contact</p>
+              <h2 class="contact__headline">
+                Ready To Build Your <span class="c-serif c-red">Next Video?</span>
+              </h2>
+              <p class="contact__sub">
+                48-hour delivery &middot; Every frame colour-matched.
+              </p>
+
+              <a href="https://wa.link/dwd485" class="btn-primary magnetic-btn" target="_blank" rel="noopener noreferrer">
+                <span>DM to Book Your Slot</span>
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 13.5L13.5 4.5M13.5 4.5H6.5M13.5 4.5V11.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+
+            <div class="contact__rows">
+              <a href="https://wa.link/g9cn31" class="contact__row fluid-glass-card" target="_blank" rel="noopener noreferrer">
+                <span class="contact__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.35 0-2.62-.32-3.73-.9L3 21l1.9-5.77A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+                </span>
+                <span class="contact__meta">
+                  <span class="contact__label-text">WhatsApp</span>
+                  <span class="contact__value">+91 8088425328</span>
+                </span>
+              </a>
+
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=veltmedia7@gmail.com&su=Project%20Inquiry%20%2F%20Booking%20a%20Slot&body=Hi%20Velt%20Media%2C%0A%0AI%E2%80%99m%20reaching%20out%20to%20book%20a%20post-production%20slot%20for%20an%20upcoming%20project." target="_blank" rel="noopener noreferrer" class="contact__row fluid-glass-card">
+                <span class="contact__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                </span>
+                <span class="contact__meta">
+                  <span class="contact__label-text">Email</span>
+                  <span class="contact__value">veltmedia7@gmail.com</span>
+                </span>
+              </a>
+
+              <a href="https://www.instagram.com/veltmedia__/" class="contact__row fluid-glass-card" target="_blank" rel="noopener noreferrer">
+                <span class="contact__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.5"/></svg>
+                </span>
+                <span class="contact__meta">
+                  <span class="contact__label-text">Instagram</span>
+                  <span class="contact__value">@veltmedia__</span>
+                </span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================= FOOTER ============================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="#hero" class="logo">
+            <span class="logo__main">VELT</span>
+            <span class="logo__sub">MEDIA</span>
+          </a>
+          <p class="footer__tagline">Reels &middot; Shots &middot; Post-Production</p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="#services">Services</a>
+          <a href="#branches">Branches</a>
+          <a href="#work">Work</a>
+          <a href="#team">Team</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="footer__social">
+          <a href="https://wa.link/g9cn31" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.35 0-2.62-.32-3.73-.9L3 21l1.9-5.77A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+          </a>
+          <a href="mailto:veltmedia7@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </a>
+          <a href="https://www.instagram.com/veltmedia__/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.5"/></svg>
           </a>
         </div>
       </div>
 
-    </div>
-  </section>
-
-</main>
-
-<!-- ============================= FOOTER ============================= -->
-<footer class="footer">
-  <div class="container">
-
-    <div class="footer__top">
-      <div class="footer__brand">
-        <a href="#hero" class="brand-lockup">
-          <span class="brand-lockup__main">VELT</span>
-          <span class="brand-lockup__sub">M E D I A</span>
-        </a>
-        <p class="footer__tagline">Reels &bull; Shots &bull; Post-Production</p>
-      </div>
-
-      <nav class="footer__nav" aria-label="Footer">
-        <a href="#services">Services</a>
-        <a href="#branches">Branches</a>
-        <a href="#work">Work</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="footer__social">
-        <a href="https://wa.link/g9cn31" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.35 0-2.62-.32-3.73-.9L3 21l1.9-5.77A8.5 8.5 0 1 1 21 11.5Z"/></svg>
-        <a href="mailto:veltmedia7@gmail.com?subject=Project%20Inquiry%20%2F%20Booking%20a%20Slot&body=Hi%20Velt%20Media%2C%0A%0AI%E2%80%99m%20reaching%20out%20to%20book%20a%20post-production%20slot%20for%20an%20upcoming%20project.%0A%0APlease%20let%20me%20know%20your%20current%20availability%20and%20the%20best%20time%20for%20a%20quick%20chat%20or%20discovery%20call%20to%20go%20over%20the%20scope%20and%20timeline.%0A%0ALooking%20forward%20to%20connecting!" aria-label="Email">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-        </a>
-        <a href="https://www.instagram.com/veltmedia__/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.5"/></svg>
-        </a>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 VELT MEDIA. All rights reserved.</p>
       </div>
     </div>
+  </footer>
 
-    <div class="footer__bottom">
-      <p class="footer__copy">&copy; 2026 VELT MEDIA. All rights reserved.</p>
-    </div>
-
-  </div>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
