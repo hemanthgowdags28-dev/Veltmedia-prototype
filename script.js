@@ -1,5 +1,5 @@
 /* =====================================================================
-   VELT MEDIA — Minimal 3D Fluid Glass & Scroll Animations
+   VELT MEDIA — Minimal 3D Fluid Glass, WhatsApp Slot Builder & UX
    ===================================================================== */
 
 import * as THREE from 'three';
@@ -12,6 +12,12 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
   const body = document.body;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+  const WHATSAPP_NUMBER = '918088425328';
+
+  function buildWhatsAppUrl(message) {
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  }
 
   /* ============================================================
      1. HEADER SCROLL & MOBILE NAVIGATION
@@ -97,7 +103,72 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
   }
 
   /* ============================================================
-     3. ANIMATED STAT COUNTERS
+     3. WHATSAPP PRE-FILLED MESSAGE CUSTOMIZER & REDIRECT REPAIR
+     ============================================================ */
+  const slotChips = document.querySelectorAll('.slot-chip');
+  const waMessagePreview = document.getElementById('waMessagePreview');
+  const mainWaBookingBtn = document.getElementById('mainWaBookingBtn');
+  const globalWaLinks = document.querySelectorAll('[data-wa-link]');
+
+  function updateWhatsAppMessage(projectType) {
+    const message = `Hi VELT MEDIA! I’d like to book a 48-hour post-production slot for a ${projectType}. Please let me know your availability and next steps!`;
+    const url = buildWhatsAppUrl(message);
+
+    if (waMessagePreview) {
+      waMessagePreview.textContent = `“${message}”`;
+    }
+    if (mainWaBookingBtn) {
+      mainWaBookingBtn.setAttribute('href', url);
+    }
+    globalWaLinks.forEach((link) => {
+      link.setAttribute('href', url);
+    });
+  }
+
+  if (slotChips.length) {
+    slotChips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        slotChips.forEach((c) => c.classList.toggle('active', c === chip));
+        const selectedType = chip.getAttribute('data-slot-type') || 'video project';
+        updateWhatsAppMessage(selectedType);
+      });
+    });
+  }
+
+  /* ============================================================
+     4. COPY TO CLIPBOARD & TOAST NOTIFICATION
+     ============================================================ */
+  const copyToast = document.getElementById('copyToast');
+  const copyToastText = document.getElementById('copyToastText');
+  let toastTimer = null;
+
+  function showToast(text) {
+    if (!copyToast || !copyToastText) return;
+    copyToastText.textContent = text;
+    copyToast.classList.add('visible');
+    copyToast.setAttribute('aria-hidden', 'false');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      copyToast.classList.remove('visible');
+      copyToast.setAttribute('aria-hidden', 'true');
+    }, 2400);
+  }
+
+  document.querySelectorAll('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const val = btn.getAttribute('data-copy');
+      if (!val) return;
+      try {
+        await navigator.clipboard.writeText(val);
+        showToast(`Copied: ${val}`);
+      } catch {
+        showToast(`Contact: ${val}`);
+      }
+    });
+  });
+
+  /* ============================================================
+     5. ANIMATED STAT COUNTERS
      ============================================================ */
   const statEls = document.querySelectorAll('[data-count]');
   function animateCount(el) {
@@ -137,7 +208,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
   }
 
   /* ============================================================
-     4. INTERACTIVE COLOR GRADE COMPARATOR
+     6. INTERACTIVE COLOR GRADE COMPARATOR
      ============================================================ */
   const gradeRange = document.getElementById('gradeRange');
   const gradeRawLayer = document.getElementById('gradeRawLayer');
@@ -154,7 +225,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
   }
 
   /* ============================================================
-     5. INTERACTIVE WORK GALLERY FILTERING
+     7. INTERACTIVE WORK GALLERY FILTERING
      ============================================================ */
   const filterBtns = document.querySelectorAll('.filter-btn');
   const galleryItems = document.querySelectorAll('.gallery-item');
@@ -193,7 +264,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
   }
 
   /* ============================================================
-     6. FLUID GLASS CARD TILT & MAGNETIC BUTTONS (DESKTOP)
+     8. FLUID GLASS CARD TILT & MAGNETIC BUTTONS (DESKTOP)
      ============================================================ */
   if (!prefersReducedMotion && finePointer) {
     const tiltCards = document.querySelectorAll('[data-tilt-card]');
@@ -255,7 +326,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
   }
 
   /* ============================================================
-     7. CURSOR GLOW
+     9. CURSOR GLOW
      ============================================================ */
   const cursorGlow = document.getElementById('cursorGlow');
   if (cursorGlow && !prefersReducedMotion && finePointer) {
@@ -297,7 +368,33 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
   }
 
   /* ============================================================
-     8. THREE.JS MINIMAL 3D FLUID GLASS SCULPTURE
+     10. COLLAPSIBLE BOTTOM CONTROL DOCK
+     ============================================================ */
+  const bottomDock = document.getElementById('bottomDock');
+  const dockToggle = document.getElementById('dockToggle');
+  const dockToggleLabel = document.getElementById('dockToggleLabel');
+
+  function toggleDock() {
+    if (!bottomDock) return;
+    const collapsed = bottomDock.classList.toggle('is-collapsed');
+    if (dockToggle) dockToggle.setAttribute('aria-expanded', String(!collapsed));
+    if (dockToggleLabel) {
+      dockToggleLabel.textContent = collapsed ? '▴ Optics' : '▾ Optics';
+    }
+  }
+
+  if (dockToggle) {
+    dockToggle.addEventListener('click', toggleDock);
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'h' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+      toggleDock();
+    }
+  });
+
+  /* ============================================================
+     11. THREE.JS MINIMAL 3D FLUID GLASS SCULPTURE
      ============================================================ */
   function initThreeFluidGlassScene() {
     const mount = document.getElementById('webgl-mount');
@@ -518,10 +615,34 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
       scrollProgress: 0,
       pointerX: 0,
       pointerY: 0,
+      explodeCurrent: 0,
+      explodeTarget: 0,
+      crimsonCurrent: 0.28,
+      crimsonTarget: 0.28,
       posXCurrent: window.innerWidth > 900 ? 1.75 : 0.45,
       posYCurrent: window.innerWidth > 900 ? 0.1 : 0.25,
       scaleCurrent: window.innerWidth > 900 ? 0.92 : 0.62,
     };
+
+    // Wire Bottom Dock Mode Buttons
+    const dockBtns = document.querySelectorAll('[data-lens-mode]');
+    dockBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-lens-mode');
+        dockBtns.forEach((b) => b.classList.toggle('active', b === btn));
+
+        if (mode === 'calm') {
+          state.explodeTarget = 0;
+          state.crimsonTarget = 0.28;
+        } else if (mode === 'exploded') {
+          state.explodeTarget = 0.95;
+          state.crimsonTarget = 0.45;
+        } else if (mode === 'crimson') {
+          state.explodeTarget = 0.3;
+          state.crimsonTarget = 1.2;
+        }
+      });
+    });
 
     window.addEventListener(
       'pointermove',
@@ -573,6 +694,9 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
       const elapsed = clock.getElapsedTime();
       shaderUniforms.uTime.value = elapsed;
 
+      state.explodeCurrent = THREE.MathUtils.damp(state.explodeCurrent, state.explodeTarget, 5, dt);
+      state.crimsonCurrent = THREE.MathUtils.damp(state.crimsonCurrent, state.crimsonTarget, 5, dt);
+
       const isDesktop = window.innerWidth > 900;
       const sp = state.scrollProgress;
       const heroWeight = Math.max(0, 1 - sp * 3.8);
@@ -603,12 +727,15 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
       rigGroup.rotation.y = THREE.MathUtils.damp(rigGroup.rotation.y, targetRotY, 5, dt);
       rigGroup.rotation.x = THREE.MathUtils.damp(rigGroup.rotation.x, targetRotX, 5, dt);
 
-      const exp = Math.sin(sp * Math.PI) * 0.32;
+      const exp = state.explodeCurrent + Math.sin(sp * Math.PI) * 0.32;
       fluidGlassMesh.rotation.z = -elapsed * 0.14;
       outerRingMesh.position.z = exp * 0.55;
       outerRingMesh.rotation.x = elapsed * 0.24 + exp * 0.4;
       crimsonRingMesh.position.z = exp * 0.3;
       crimsonRingMesh.rotation.y = -elapsed * 0.32;
+
+      coreMat.emissiveIntensity = state.crimsonCurrent;
+      crimsonRimLight.intensity = 5.5 + state.crimsonCurrent * 6.0;
 
       if (!prefersReducedMotion) {
         for (let i = 0; i < shardCount; i++) {
@@ -644,7 +771,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
   initThreeFluidGlassScene();
 
   /* ============================================================
-     9. GSAP SCROLL REVEALS
+     12. GSAP SCROLL REVEALS
      ============================================================ */
   function initScrollAnimations() {
     if (
